@@ -1,80 +1,29 @@
-#execute "testing" do
-#  command %Q{
-#    echo "i ran at #{Time.now}" >> /root/cheftime
-#  }
-#end
+if %w{solo app app_master}.include?(node[:instance_role])
+  require_recipe "memcached"
+  require_recipe "memcached::configure"
+end
 
-# uncomment to turn on thinking sphinx/ultra sphinx. Remember to edit cookbooks/sphinx/recipes/default.rb first!
-# require_recipe "sphinx"
+if %w{solo db_master}.include?(node[:instance_role])
+  require_recipe "redis"
+end
 
-#uncomment to turn on memcached
-# require_recipe "memcached"
+if %w{solo app_master app}.include?(node[:instance_role])
+  require_recipe "redis::configure"
+end
 
-#uncomment ot run the riak recipe
-# require_recipe "riak"
+if %w{solo app_master}.include?(node[:instance_role])
+  require_recipe "resque-scheduler"
+end
 
-#uncomment to run the authorized_keys recipe
-#require_recipe "authorized_keys"
+if %w{solo app app_master}.include?(node[:instance_role])
+  require_recipe "resque"
+end
 
-#uncomment to run the eybackup_slave recipe
-#require_recipe "eybackup_slave"
-
-#uncomment to run the ssmtp recipe
-#require_recipe "ssmtp"
-
-#uncomment to run the sunspot recipe
-# require_recipe "sunspot"
-
-#uncomment to run the exim recipe
-#exim_auth "auth" do
-#  my_hostname "my_hostname.com"
-#  smtp_host "smtp.sendgrid.net"
-#  username "username"
-#  password "password"
-#end
-
-#uncomment to run the exim::auth recipe
-#require_recipe "exim::auth"
-#require_recipe "mongodb"
-
-#uncomment to run the resque recipe
-# require_recipe "resque"
-
-#uncomment to run the resque-scheduler recipe
-# require_recipe "resque-scheduler"
-
-#uncomment to run the redis recipe
-#require_recipe "redis"
-
-#require_recipe "logrotate"
-#
-#uncomment to use the solr recipe
-#require_recipe "solr"
-
-#uncomment to include the emacs recipe
-#require_recipe "emacs"
-#require_recipe "varnish_frontend"
-#uncomment to include the eybackup_verbose recipe
-#require_recipe "eybackup_verbose"
-
-#uncomment to include the mysql_replication_check recipe
-#require_recipe "mysql_replication_check"
-
-#uncomment to include the mysql_administrative_tools recipe
-# additional configuration of this recipe is required
-#require_recipe "mysql_administrative_tools"
-
-#uncomment to include the Elasticsearch recipe
-#require_recipe "elasticsearch"
-
-# To install specific plugins to Elasticsearch see below as an example
-#es_plugin "cloud-aws" do
-#  action :install
-#end
-
-#es_plugin "transport-memcached" do
-#  action :install
-#end
+# require('pp')
+# require('stringio')
+# ey_cloud_report("debug") do
+#   message(PP.pp(node,StringIO.new).string)
+# end
 
 #uncomment to include the newrelic_server_monitoring recipe
 #require_recipe "newrelic_server_monitoring"
