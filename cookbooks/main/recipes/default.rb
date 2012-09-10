@@ -11,7 +11,7 @@ if %w{solo app_master}.include?(node[:instance_role])
   require_recipe "resque-scheduler"
 end
 
-if %w{solo app app_master util}.include?(node[:instance_role])
+if %w{app app_master util}.include?(node[:instance_role])
   require_recipe "resque"
 end
 
