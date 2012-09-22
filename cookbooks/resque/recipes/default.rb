@@ -11,9 +11,9 @@ end
 worker_count = {
   'm1.small'  => 2  ,
   'm1.medium' => 8  ,
-  'm1.large'  => 12 ,
+  'm1.large'  => 10 ,
   'c1.medium' => 3  ,
-  'c1.xlarge' => 8 ,
+  'c1.xlarge' => 8  ,
 }[node[:ec2][:instance_type]] || 4
 
 node[:applications].each do |app, data|

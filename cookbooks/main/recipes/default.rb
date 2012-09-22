@@ -7,6 +7,10 @@ if %w{solo db_master}.include?(node[:instance_role])
   require_recipe "redis"
 end
 
+if %w{app app_master util}.include?(node[:instance_role])
+  require_recipe  "redis::configure"
+end
+
 if %w{solo app_master}.include?(node[:instance_role])
   require_recipe "resque-scheduler"
 end
