@@ -13,8 +13,7 @@ template "/etc/newrelic/nrsysmond.cfg" do
   group 'root'
   mode 0644
   backup 0
-  variables(
-    :key   => node[:newrelic][:license_key])
+  variables(:key => node[:newrelic_license_key])
 end
 
 remote_file "/etc/monit.d/nrsysmond.monitrc" do

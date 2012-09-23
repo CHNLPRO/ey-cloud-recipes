@@ -19,6 +19,8 @@ if %w{app app_master util}.include?(node[:instance_role])
   require_recipe "resque"
 end
 
+require_recipe "newrelic_server_monitoring"
+
 # require('pp')
 # require('stringio')
 # ey_cloud_report("debug") do
