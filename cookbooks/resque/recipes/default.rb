@@ -16,6 +16,10 @@ worker_count = {
   'c1.xlarge' => 8  ,
 }[node[:ec2][:instance_type]] || 4
 
+if %w{app}.include?(node[:instance_role])
+  worker_count /= 2
+end
+
 node[:applications].each do |app, data|
 
   template "/etc/monit.d/resque_#{app}.monitrc" do
