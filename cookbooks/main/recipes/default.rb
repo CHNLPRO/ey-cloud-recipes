@@ -20,6 +20,7 @@ if %w{util app}.include?(node[:instance_role])
 end
 
 require_recipe "newrelic_server_monitoring"
+require_recipe "crontab"
 
 # require('pp')
 # require('stringio')
