@@ -22,7 +22,11 @@ end
 require_recipe "newrelic_server_monitoring"
 require_recipe "crontab"
 
-# require('pp')
+require('pp')
+File.open("/home/#{node[:owner_name]}/node.rb","w") do |f|
+  PP.pp(node,f)
+end
+
 # require('stringio')
 # ey_cloud_report("debug") do
 #   message(PP.pp(node,StringIO.new).string)

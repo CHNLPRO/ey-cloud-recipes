@@ -7,7 +7,7 @@ if node[:instance_role] == 'solo'
   redis_host = node[:fqdn]
 else
   redis_host = node.engineyard.environment.instances.detect do |instance|
-    instance[:role] == 'db_master'
+    %{db_master solo}.include?(instance[:role])
   end[:private_hostname]
 end
 
