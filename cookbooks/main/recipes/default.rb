@@ -19,6 +19,10 @@ if %w{util app}.include?(node[:instance_role])
   require_recipe "resque"
 end
 
+if %w{solo app app_master}.include?(node[:instance_role])
+  require_recipe "nginx"
+end
+
 require_recipe "newrelic_server_monitoring"
 require_recipe "crontab"
 
