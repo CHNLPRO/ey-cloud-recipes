@@ -1,3 +1,8 @@
+execute 'nginx-reload-config' do
+  command "sudo /etc/init.d/nginx reload"
+  action :nothing
+end
+
 node[:applications].each do |app_name,data|
 
   domain   = data["vhosts"]
@@ -18,7 +23,3 @@ node[:applications].each do |app_name,data|
   end
 end
 
-execute 'nginx-reload-config' do
-  command "sudo /etc/init.d/nginx reload"
-  action :nothing
-end

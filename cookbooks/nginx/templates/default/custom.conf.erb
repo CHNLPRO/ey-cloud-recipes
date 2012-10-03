@@ -6,7 +6,7 @@
   }
 <% end %>
 
-if( $host !~* .*<%= @domain %> ) {
+if ( $host !~* .*<%= @domain %> ) {
   rewrite .* $scheme://<%= @domain %> permanent;
   break;
 }
