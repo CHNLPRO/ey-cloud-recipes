@@ -31,6 +31,15 @@ File.open("/home/#{node[:owner_name]}/node.rb","w") do |f|
   PP.pp(node,f)
 end
 
+template "/home/#{node[:owner_name]}/.bashrc" do
+  owner node[:owner_name]
+  group node[:owner_name]
+  mode 0644
+  source "bashrc.erb"
+  variables :application_names => node[:applications].keys, :rails_env => node[:environment][:framework_env]
+end
+
+
 # require('stringio')
 # ey_cloud_report("debug") do
 #   message(PP.pp(node,StringIO.new).string)
