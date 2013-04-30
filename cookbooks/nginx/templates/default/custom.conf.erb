@@ -1,13 +1,4 @@
-<% for prefix in @prefixes %>
-  if ($host ~* <%= prefix %>\.(.*)) {
-    set $host_without_www $1;
-    rewrite ^(.*)$ $scheme://$host_without_www$1 permanent;
-    break;
-  }
-<% end %>
-
-if ( $host !~* .*<%= @domain %> ) {
-  rewrite .* $scheme://<%= @domain %> permanent;
+if ($host != '<%= @domain %>' ) {
+  rewrite ^/(.*)$ $scheme://<%= @domain%>/$1 permanent;
   break;
 }
-

@@ -15,10 +15,7 @@ node[:applications].each do |app_name,data|
     group  node[:owner_name]
     mode   0644
     source "custom.conf.erb"
-    variables({
-      :domain   => domain,
-      :prefixes => %w{www}
-    })
+    variables(:domain   => domain)
     notifies :run, "execute[nginx-reload-config]"
   end
 end
