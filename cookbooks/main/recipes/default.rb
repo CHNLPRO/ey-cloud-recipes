@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 if %w{solo app app_master}.include?(node[:instance_role])
   require_recipe "memcached"
   require_recipe "memcached::configure"
@@ -45,7 +44,6 @@ end
 # ey_cloud_report("debug") do
 #   message(PP.pp(node,StringIO.new).string)
 # end
-=======
 #execute "testing" do
 #  command %Q{
 #    echo "i ran at #{Time.now}" >> /root/cheftime
