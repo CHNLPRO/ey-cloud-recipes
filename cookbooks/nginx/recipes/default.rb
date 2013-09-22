@@ -1,9 +1,9 @@
-service "ngnix" do
-  supports :reload => true
-  action [ :reload ]
-  reload_command "sudo /etc/init.d/nginx reload"
-end
-
+#service "ngnix" do
+#  supports :reload => true
+#  action [ :reload ]
+#  reload_command "sudo /etc/init.d/nginx reload"
+#end
+#
 node[:applications].each do |app_name,data|
 
   domain   = data["vhosts"]
@@ -17,7 +17,7 @@ node[:applications].each do |app_name,data|
     mode   0644
     source "custom.conf.erb"
     variables(:domain   => domain)
-    notifies :reload, "service[nginx]", :immediate
+    #notifies :reload, "service[nginx]", :immediate
   end
 end
 
