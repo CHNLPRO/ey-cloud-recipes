@@ -1,3 +1,8 @@
+require('pp')
+File.open("/home/#{node[:owner_name]}/node.rb", "w") do |f|
+  PP.pp(node, f)
+end
+
 if %w{solo app app_master}.include?(node[:instance_role])
   require_recipe "memcached"
   require_recipe "memcached::configure"
@@ -8,7 +13,7 @@ if %w{solo db_master}.include?(node[:instance_role])
 end
 
 if %w{app app_master util}.include?(node[:instance_role])
-  require_recipe  "redis::configure"
+  require_recipe "redis::configure"
 end
 
 if %w{solo app_master}.include?(node[:instance_role])
@@ -25,11 +30,6 @@ end
 
 require_recipe "newrelic_server_monitoring"
 require_recipe "crontab"
-
-require('pp')
-File.open("/home/#{node[:owner_name]}/node.rb","w") do |f|
-  PP.pp(node,f)
-end
 
 template "/home/#{node[:owner_name]}/.bashrc" do
   owner node[:owner_name]
@@ -148,7 +148,7 @@ end
 # include_recipe "jenkins"
 
 #enable Extension modules for a given Postgresql database
-if ['solo','db_master', 'db_slave'].include?(node[:instance_role])
+if ['solo', 'db_master', 'db_slave'].include?(node[:instance_role])
   # Extensions that support both Postgres 9.0 and 9.1 and 9.2
   # postgresql9_autoexplain "dbname"
   # postgresql9_btree_gin "dbname"
