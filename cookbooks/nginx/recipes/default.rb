@@ -17,7 +17,7 @@ node[:applications].each do |app_name,data|
     mode   0644
     source "custom.conf.erb"
     variables(:domain   => domain)
-    notifies :reload, "service[nginx]", :immeditately
+    notifies :reload, "service[nginx]", :immediate
   end
 end
 
